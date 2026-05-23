@@ -3,7 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Convite de Casamento | Edmilson & Farida</title>
+    <title>Convite de Casamento | Nicole & Nuno</title>
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
@@ -2584,7 +2584,7 @@
 /* Para mobile, descer ainda mais */
 @media (max-width: 768px) {
   .scroll-indicator {
-    bottom: 40px;  /* Ainda mais baixo no celular */
+    bottom: -50px;  /* Ainda mais baixo no celular */
   }
   
   .scroll-arrow {
@@ -2888,11 +2888,25 @@
   </head>
 
   <body>
-    <!-- CAPA - SCROLL 1 (COM ENVELOPE) -->
-<section id="capa" class="secao visivel" style="background: #efe4de; padding: 0; display: flex; justify-content: center; align-items: center;">
-  <div class="cover-envelope" id="coverEnvelope" style="position: relative; width: 390px; height: 700px; cursor: pointer;">
-    <div class="envelope-img" style="position: absolute; inset: 0; background-image: url('envelope.jpeg'); background-size: cover; background-position: center; transition: transform 2s ease;"></div>
-    <div class="texto-envelope" style="position: absolute; bottom: 40px; width: 100%; text-align: center; color: white; letter-spacing: 4px; font-size: 14px; text-transform: uppercase; text-shadow: 0 2px 8px rgba(0,0,0,0.3); z-index: 10;">ABRIR CONVITE</div>
+    <!-- CAPA - ENVELOPE NOVO -->
+<section id="capa" class="secao visivel" style="background: #f3ebe1; padding: 0; margin: 0; display: flex; justify-content: center; align-items: center; min-height: 100vh;">
+  <div style="position: relative; width: 100%; max-width: 500px; height: 100vh; overflow: hidden; background: #f3ebe1; perspective: 1300px;">
+    
+    <!-- Base -->
+    <div style="position: absolute; bottom: 0; left: 0; width: 100%; z-index: 1;">
+      <img src="base.png" style="width: 100%; height: 350px; object-fit: cover; object-position: top; display: block;" />
+    </div>
+
+    <!-- Aba -->
+    <div id="envelopeFlap" style="position: absolute; top: 150px; left: 0; width: 100%; height: 350px; z-index: 20; transform-origin: top center; transform-style: preserve-3d; backface-visibility: hidden; transition: transform 4.5s cubic-bezier(0.22, 1, 0.36, 1); transform: perspective(1300px) rotateX(10deg);">
+      <img src="aba.png" style="width: 100%; height: 350px; object-fit: cover; object-position: bottom; display: block;" />
+    </div>
+
+    <!-- Selo -->
+    <div id="waxSeal" style="position: absolute; top: 62%; left: 50%; transform: translateX(-50%); width: 100px; height: 100px; z-index: 50; cursor: pointer;">
+      <img src="selo.png" style="width: 100%; height: 100%; object-fit: contain;" />
+    </div>
+
   </div>
 </section>
 <!-- CONTRACAPA -->
@@ -3734,34 +3748,44 @@ musicaFundo.addEventListener("ended", function() {
 
       enviarMensagemBtn.addEventListener("click", () => enviarMensagemFirebase());
 
-    const coverEnvelope = document.getElementById("coverEnvelope");
+   const waxSeal = document.getElementById("waxSeal");
+const envelopeFlap = document.getElementById("envelopeFlap");
+let envelopeAberto = false;
 
-if (coverEnvelope) {
-  coverEnvelope.addEventListener("click", function() {
-    this.classList.add("aberto");
-    
+if (waxSeal) {
+  waxSeal.addEventListener("click", function() {
+    if (envelopeAberto) return;
+    envelopeAberto = true;
+
+    // Abrir aba do envelope
+    envelopeFlap.style.transform = "perspective(1300px) rotateX(90deg)";
+    waxSeal.style.opacity = "0";
+    waxSeal.style.transition = "opacity 0.5s";
+
+    // Após animação do envelope, mostrar contracapa
     setTimeout(() => {
       const contraCapa = document.getElementById("contraCapa");
       const secaoCapa = document.getElementById("capa");
-      
+
       secaoCapa.style.opacity = "0";
       secaoCapa.style.transition = "opacity 0.8s ease";
-      
+
       contraCapa.classList.remove("oculto");
       setTimeout(() => contraCapa.classList.add("visible"), 100);
-      
+
       setTimeout(() => {
         secaoCapa.classList.add("oculto");
         secaoCapa.style.display = "none";
       }, 800);
-      
+
       setTimeout(() => tocarMusica(), 500);
-      
+
       setTimeout(() => {
         conteudoPrincipal.classList.remove("oculto");
         conteudoPrincipal.style.opacity = "1";
       }, 2000);
-    }, 100);
+
+    }, 2000); // espera a aba abrir
   });
 }
       // Animação de aparecimento das seções
@@ -4581,7 +4605,7 @@ window.addEventListener('load', function() {
 
   const app = initializeApp(firebaseConfig);
   const db = getFirestore(app);
-  const mensagensRef = collection(db, "mensagens");
+  const mensagensRef = collection(db, "mensagens-nuno-nicole");
 
   function criarCard(msg, index) {
     return `
@@ -4658,7 +4682,7 @@ window.addEventListener('load', function() {
   };
 
   // ========== LISTA DE PRESENTES - FIREBASE ==========
-      const presentesRef = collection(db, "presentes-edmilson-farida");
+      const presentesRef = collection(db, "presentes-nuno-nicole");
 
       function carregarPresentesEscolhidos() {
         onSnapshot(presentesRef, (snapshot) => {
