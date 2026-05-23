@@ -4657,7 +4657,50 @@ window.addEventListener('load', function() {
     }
   };
 
-  window.addEventListener("load", carregarMensagens);
+  // ========== LISTA DE PRESENTES - FIREBASE ==========
+      const presentesRef = collection(db, "presentes-edmilson-farida");
+
+      function carregarPresentesEscolhidos() {
+        onSnapshot(presentesRef, (snapshot) => {
+          const escolhidos = [];
+          snapshot.forEach(doc => escolhidos.push(doc.data().presente));
+          presentesEscolhidos = escolhidos;
+          renderizarListaPresentes();
+        });
+      }
+
+      window.escolherPresente = async function(presente) {
+        if (usuarioEscolheu) {
+          alert("❌ Você já escolheu um presente! Cada convidado pode escolher apenas 1 presente.");
+          return;
+        }
+
+        if (presentesEscolhidos.includes(presente)) {
+          alert(`❌ O presente "${presente}" já foi escolhido. Por favor, escolha outro.`);
+          return;
+        }
+
+        if (confirm(`✅ Confirmar: "${presente}"?`)) {
+          try {
+            await addDoc(presentesRef, {
+              presente: presente,
+              timestamp: Date.now()
+            });
+
+            usuarioEscolheu = true;
+            localStorage.setItem("usuarioJaEscolheu", "true");
+
+          } catch (err) {
+            alert("Erro ao guardar presente. Tenta novamente.");
+            console.error(err);
+          }
+        }
+      };
+
+      window.addEventListener("load", function() {
+        carregarMensagens();
+        carregarPresentesEscolhidos();
+      });
 </script>
   </body>
 </html>
