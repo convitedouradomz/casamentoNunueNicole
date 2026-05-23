@@ -3,7 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Convite de Casamento | Nunu & Nicole</title>
+    <title>Convite de Casamento | Edmilson & Farida</title>
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
@@ -267,7 +267,7 @@
   left: 0;
   width: 100%;
   height: 100%;
-  background: url("Foto1.jpeg") center/contain no-repeat;
+  background: url("Capa.jpeg") center/contain no-repeat;
   z-index: -1;
 }
       #capa.oculto {
@@ -2396,7 +2396,7 @@
 /* CELULAR - foto da capa completa */
 @media (max-width: 768px) {
   #capa::after {
-    background: url("Foto1.jpeg") center/contain no-repeat;
+    background: url("Capa.jpeg") center/contain no-repeat;
     background-size: contain;
   }
 }
@@ -2491,7 +2491,7 @@
   left: 0;
   width: 100%;
   height: 100%;
-  background-image: url("Foto1.jpeg");
+  background-image: url("Capa.jpeg");
   background-size: cover;
   background-position: center;
   z-index: 0;
@@ -2584,7 +2584,7 @@
 /* Para mobile, descer ainda mais */
 @media (max-width: 768px) {
   .scroll-indicator {
-    bottom: -90px;  /* Ainda mais baixo no celular */
+    bottom: 40px;  /* Ainda mais baixo no celular */
   }
   
   .scroll-arrow {
@@ -3462,7 +3462,7 @@
     <div class="iniciais-elegante">N ♡ N</div>
 
     <p style="color: rgba(255, 255, 255, 0.9); font-size: 1.2rem; margin: 20px 0;">
-      Um convite digital para o casamento de Nunu e Nicole <br />por
+      Um convite digital para o casamento de Edmilson e Farida <br />por
       Convites Dourados MZ
     </p>
 
@@ -3732,52 +3732,7 @@ musicaFundo.addEventListener("ended", function() {
         });
       }
 
-      // Enviar nova mensagem
-      enviarMensagemBtn.addEventListener("click", function () {
-        const nome = document.getElementById("nomeMensagem").value.trim();
-        const relacao = document.getElementById("relacaoMensagem").value;
-        const texto = document.getElementById("textoMensagem").value.trim();
-
-        if (!nome || !relacao || !texto) {
-          alert("Por favor, preencha todos os campos antes de enviar.");
-          return;
-        }
-
-        // Criar nova mensagem
-        const novaMensagem = {
-          nome: nome,
-          relacao: relacao,
-          texto: texto,
-          data: new Date().toLocaleDateString("pt-PT"),
-        };
-
-        // Salvar no localStorage
-        const mensagensSalvas =
-          JSON.parse(localStorage.getItem("mensagensCasamento")) ||
-          mensagensExemplo;
-        mensagensSalvas.unshift(novaMensagem); // Adicionar no início
-        localStorage.setItem(
-          "mensagensCasamento",
-          JSON.stringify(mensagensSalvas),
-        );
-
-        // Limpar formulário
-        document.getElementById("nomeMensagem").value = "";
-        document.getElementById("relacaoMensagem").value = "";
-        document.getElementById("textoMensagem").value = "";
-
-        // Atualizar as últimas mensagens
-        carregarUltimasMensagens();
-
-        // Mostrar popup de confirmação
-        const popup = document.getElementById("popupMensagem");
-        const overlay = document.getElementById("overlay");
-
-        overlay.classList.add("ativo");
-        setTimeout(() => {
-          popup.classList.add("ativo");
-        }, 50);
-      });
+      enviarMensagemBtn.addEventListener("click", () => enviarMensagemFirebase());
 
     const coverEnvelope = document.getElementById("coverEnvelope");
 
@@ -4610,5 +4565,99 @@ window.addEventListener('load', function() {
 <div id="botaoMusica" class="botao-musica-flutuante">
   <i id="iconeMusica" class="fas fa-play"></i>
 </div>
+<!-- FIREBASE -->
+<script type="module">
+  import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-app.js";
+  import { getFirestore, collection, addDoc, query, orderBy, onSnapshot } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore.js";
+
+  const firebaseConfig = {
+    apiKey: "AIzaSyAsXcP98tL4l8REoZdGJtgC2w0oAMDxRcs",
+    authDomain: "casamentodoedmilsonefarida.firebaseapp.com",
+    projectId: "casamentodoedmilsonefarida",
+    storageBucket: "casamentodoedmilsonefarida.firebasestorage.app",
+    messagingSenderId: "113127738183",
+    appId: "1:113127738183:web:acf1f999d2f36e031a9a62"
+  };
+
+  const app = initializeApp(firebaseConfig);
+  const db = getFirestore(app);
+  const mensagensRef = collection(db, "mensagens");
+
+  function criarCard(msg, index) {
+    return `
+      <div class="mensagem-card" style="animation-delay:${index * 0.15}s">
+        <div class="mensagem-header">
+          <div class="mensagem-autor">${msg.nome}</div>
+          <div class="mensagem-relacao">${msg.relacao}</div>
+        </div>
+        <div class="mensagem-texto">"${msg.texto}"</div>
+        <div class="mensagem-data">${msg.data}</div>
+      </div>`;
+  }
+
+  function renderMensagens(mensagens) {
+    const ultimasContainer = document.getElementById("ultimasMensagensContainer");
+    const todasContainer = document.getElementById("mensagensContainer");
+    if (!ultimasContainer || !todasContainer) return;
+
+    if (mensagens.length === 0) {
+      ultimasContainer.innerHTML = '<div class="sem-mensagens">✨ Seja o primeiro a deixar uma mensagem especial para os noivos! ✨</div>';
+      todasContainer.innerHTML = '<div class="sem-mensagens">💌 Nenhuma mensagem ainda.</div>';
+      return;
+    }
+
+    ultimasContainer.innerHTML = mensagens.slice(0, 3).map(criarCard).join("");
+    todasContainer.innerHTML = mensagens.slice(3).length > 0
+      ? mensagens.slice(3).map(criarCard).join("")
+      : '<div class="sem-mensagens">Todas as mensagens estão na aba principal.</div>';
+  }
+
+  // Carregar mensagens em tempo real
+  function carregarMensagens() {
+    const q = query(mensagensRef, orderBy("timestamp", "desc"));
+    onSnapshot(q, (snapshot) => {
+      const mensagens = [];
+      snapshot.forEach(doc => mensagens.push(doc.data()));
+      renderMensagens(mensagens);
+    });
+  }
+
+  // Enviar mensagem
+  window.enviarMensagemFirebase = async function() {
+    const nome = document.getElementById("nomeMensagem").value.trim();
+    const relacao = document.getElementById("relacaoMensagem").value;
+    const texto = document.getElementById("textoMensagem").value.trim();
+
+    if (!nome || !relacao || !texto) {
+      alert("Por favor, preencha todos os campos antes de enviar.");
+      return;
+    }
+
+    try {
+      await addDoc(mensagensRef, {
+        nome,
+        relacao,
+        texto,
+        data: new Date().toLocaleDateString("pt-PT"),
+        timestamp: Date.now()
+      });
+
+      document.getElementById("nomeMensagem").value = "";
+      document.getElementById("relacaoMensagem").value = "";
+      document.getElementById("textoMensagem").value = "";
+
+      const popup = document.getElementById("popupMensagem");
+      const overlay = document.getElementById("overlay");
+      overlay.classList.add("ativo");
+      setTimeout(() => popup.classList.add("ativo"), 50);
+
+    } catch (err) {
+      alert("Erro ao enviar mensagem. Tenta novamente.");
+      console.error(err);
+    }
+  };
+
+  window.addEventListener("load", carregarMensagens);
+</script>
   </body>
 </html>
