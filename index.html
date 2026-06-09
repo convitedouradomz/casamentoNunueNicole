@@ -1039,244 +1039,205 @@
         }
       }
 
-      /* AGENDA - SCROLL 6 (COM ANIMAÇÃO ZIG-ZAG) */
-      #agenda {
-        background-color: #ffffff;
-        position: relative;
-      }
+ /* AGENDA - SCROLL 6 - CORRIGIDA */
+#agenda {
+  background-color: #e2d7cc;
+  position: relative;
+}
 
-      .timeline-elegante {
-        max-width: 900px;
-        margin: 50px auto 0;
-        position: relative;
-      }
+.timeline-elegante {
+  max-width: 900px;
+  margin: 50px auto 0;
+  position: relative;
+}
 
-      .timeline-elegante::before {
-        content: "";
-        position: absolute;
-        left: 50%;
-        transform: translateX(-50%);
-        width: 1px;
-        height: 100%;
-        background: linear-gradient(
-          to bottom,
-          transparent,
-          var(--dourado),
-          var(--verde-oliva),
-          var(--dourado),
-          transparent
-        );
-      }
+.timeline-elegante::before {
+  content: "";
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 2px;
+  height: 100%;
+  background: linear-gradient(to bottom, transparent, var(--dourado), var(--verde-oliva), var(--dourado), transparent);
+}.evento-elegante {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 60px;
+  opacity: 0 !important;
+  transform: translateX(-100px) !important;
+  transition: all 0.6s ease-out !important;
+  transition-delay: 0s;
+}
 
-      @media (max-width: 768px) {
-        .timeline-elegante::before {
-          left: 40px;
-        }
-      }
+.evento-elegante:nth-child(1) { transition-delay: 0s; }
+.evento-elegante:nth-child(2) { transition-delay: 1s; }
+.evento-elegante:nth-child(3) { transition-delay: 1.8s; }
+.evento-elegante:nth-child(4) { transition-delay: 2.4s; }
+.evento-elegante:nth-child(5) { transition-delay: 2.8s; }
 
-      .evento-elegante {
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        margin-bottom: 60px;
-        opacity: 0;
-      }
+.evento-elegante:nth-child(even) {
+  transform: translateX(100px) !important;
+}
 
-      .evento-elegante:nth-child(odd) {
-        flex-direction: row;
-        transform: translateX(-100px);
-        transition:
-          opacity 0.8s ease,
-          transform 0.8s cubic-bezier(0.19, 1, 0.22, 1);
-      }
-
-      .evento-elegante:nth-child(even) {
-        flex-direction: row-reverse;
-        transform: translateX(100px);
-        transition:
-          opacity 0.8s ease,
-          transform 0.8s cubic-bezier(0.19, 1, 0.22, 1);
-      }
-
-      .evento-elegante.visivel {
-        opacity: 1;
-        transform: translateX(0);
-      }
-
-      @media (max-width: 768px) {
-        .evento-elegante,
-        .evento-elegante:nth-child(odd),
-        .evento-elegante:nth-child(even) {
-          flex-direction: row;
-          transform: translateX(-50px);
-        }
-
-        .evento-elegante.visivel {
-          transform: translateX(0);
-        }
-      }
-
-      .circulo-tempo {
-        width: 18px;
-        height: 18px;
-        background-color: var(--verde-oliva);
-        border-radius: 50%;
-        position: absolute;
-        left: 50%;
-        transform: translateX(-50%);
-        z-index: 2;
-        border: 3px solid var(--branco);
-        box-shadow: 0 0 0 3px var(--dourado-claro);
-      }
-
-      @media (max-width: 768px) {
-        .circulo-tempo {
-          left: 40px;
-        }
-      }
-
-      .icone-evento-elegante {
+.evento-elegante.visivel {
+  opacity: 1 !important;
+  transform: translateX(0) !important;
+}
+/* ícone dentro do evento */
+.icone-evento-elegante {
   width: 70px;
   height: 70px;
-  background: linear-gradient(135deg, #6d4830, #8b5e3c);  /* Círculo turquesa */
+  background: linear-gradient(135deg, #6d4830, #8b5e3c);
   border-radius: 50%;
   display: flex;
   justify-content: center;
   align-items: center;
-  color: white;  /* Ícone dentro fica branco */
+  color: white;
+  font-size: 1.8rem;
+  z-index: 3;
+  flex-shrink: 0;
+  box-shadow: 0 8px 20px rgba(0,0,0,0.2);
+  opacity: 0;
+  transform: scale(0.5);
+  transition: opacity 0.5s ease, transform 0.5s ease;
+}
 
+.evento-elegante.visivel .icone-evento-elegante {
+  opacity: 1;
+  transform: scale(1);
+  transition-delay: 0.2s;
+}
 
-        font-size: 1.8rem;
-        z-index: 3;
-        flex-shrink: 0;
-        box-shadow: 0 8px 20px rgba(138, 154, 91, 0.25);
-        position: relative;
-        overflow: hidden;
-        opacity: 0;
-        transform: scale(0.5);
-        transition:
-          opacity 0.6s ease,
-          transform 0.6s ease;
-      }
+/* card de informação */
+.info-evento-elegante {
+  width: 48%;
+  padding: 20px 25px;
+  background-color: var(--creme-claro);
+  border-radius: 12px;
+  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.07);
+  border-top: 3px solid var(--dourado);
+  opacity: 0;
+  transform: translateY(20px);
+  transition: opacity 0.5s ease, transform 0.5s ease;
+}
 
-      .evento-elegante.visivel .icone-evento-elegante {
-        opacity: 1;
-        transform: scale(1);
-        transition-delay: 0.3s;
-      }
+.evento-elegante.visivel .info-evento-elegante {
+  opacity: 1;
+  transform: translateY(0);
+  transition-delay: 0.4s;
+}
 
-      .icone-evento-elegante::before {
-        content: "";
-        position: absolute;
-        top: 0;
-        left: 0;
-        width: 100%;
-        height: 100%;
-        background: linear-gradient(
-          135deg,
-          rgba(255, 255, 255, 0.1),
-          transparent
-        );
-        border-radius: 50%;
-      }
+.evento-elegante:nth-child(odd) .info-evento-elegante {
+  margin-left: 35px;
+  text-align: left;
+}
 
-      .info-evento-elegante {
-        width: 48%;
-        padding: 30px 25px;
-        background-color: var(--creme-claro);
-        border-radius: 12px;
-        box-shadow: 0 12px 30px rgba(0, 0, 0, 0.07);
-        position: relative;
-        border-top: 3px solid var(--dourado);
-        opacity: 0;
-        transform: translateY(20px);
-        transition:
-          opacity 0.6s ease,
-          transform 0.6s ease;
-      }
+.evento-elegante:nth-child(even) .info-evento-elegante {
+  margin-right: 35px;
+  text-align: right;
+}
 
-      .evento-elegante.visivel .info-evento-elegante {
-        opacity: 1;
-        transform: translateY(0);
-        transition-delay: 0.5s;
-      }
+/* círculo na linha do tempo */
+.circulo-tempo {
+  width: 18px;
+  height: 18px;
+  background-color: var(--verde-oliva);
+  border-radius: 50%;
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 2;
+  border: 3px solid var(--branco);
+  box-shadow: 0 0 0 3px var(--dourado-claro);
+}
 
-      .evento-elegante:nth-child(odd) .info-evento-elegante {
-        margin-left: 35px;
-        text-align: left;
-      }
+/* RESPONSIVO */
+@media (max-width: 768px) {
+  .timeline-elegante::before {
+    left: 30px;
+  }
+  
+  .circulo-tempo {
+    left: 30px;
+  }
+  
+  .evento-elegante,
+  .evento-elegante:nth-child(odd),
+  .evento-elegante:nth-child(even) {
+    flex-direction: row;
+    justify-content: flex-start;
+    transform: translateX(-50px);
+    margin-left: 30px;
+  }
+  
+  .evento-elegante.visivel {
+    transform: translateX(0) !important;
+  }
+  
+  .icone-evento-elegante {
+    width: 55px;
+    height: 55px;
+    font-size: 1.4rem;
+    margin-right: 15px;
+    flex-shrink: 0;
+  }
+  
+  .info-evento-elegante,
+  .evento-elegante:nth-child(odd) .info-evento-elegante,
+  .evento-elegante:nth-child(even) .info-evento-elegante {
+    width: calc(100% - 80px);
+    margin-left: 0;
+    margin-right: 0;
+    text-align: left;
+    padding: 15px;
+  }
+}
 
-      .evento-elegante:nth-child(even) .info-evento-elegante {
-        margin-right: 35px;
-        text-align: right;
-      }
+.hora-evento-elegante {
+  font-weight: 700;
+  color: var(--dourado);
+  font-size: 1.3rem;
+  margin-bottom: 5px;
+  font-family: "Playfair Display", serif;
+}
 
-      @media (max-width: 768px) {
-        .icone-evento-elegante {
-          position: absolute;
-          left: 40px;
-          transform: translateX(-50%);
-          width: 60px;
-          height: 60px;
-          font-size: 1.6rem;
-        }
+.titulo-evento-elegante {
+  font-size: 1.4rem;
+  margin-bottom: 8px;
+  font-family: "Playfair Display", serif;
+  color: var(--verde-oliva);
+}
 
-        .info-evento-elegante,
-        .evento-elegante:nth-child(odd) .info-evento-elegante,
-        .evento-elegante:nth-child(even) .info-evento-elegante {
-          width: calc(100% - 90px);
-          margin-left: 90px;
-          text-align: left;
-          padding: 25px 20px;
-        }
-      }
+.local-evento-elegante {
+  font-style: italic;
+  margin-bottom: 15px;
+  color: var(--cinza-medio);
+  font-size: 1rem;
+}
 
-      .hora-evento-elegante {
-        font-weight: 700;
-        color: var(--dourado);
-        font-size: 1.4rem;
-        margin-bottom: 8px;
-        font-family: "Playfair Display", serif;
-      }
+.btn-mapa-elegante {
+  background: transparent;
+  color: var(--verde-oliva);
+  border: 1.5px solid var(--verde-oliva);
+  padding: 6px 18px;
+  border-radius: 50px;
+  cursor: pointer;
+  font-family: "Cormorant Garamond", serif;
+  font-size: 0.9rem;
+  font-weight: 600;
+  transition: all 0.4s ease;
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  text-decoration: none;
+}
 
-      .titulo-evento-elegante {
-        font-size: 1.6rem;
-        margin-bottom: 10px;
-        font-family: "Playfair Display", serif;
-        color: var(--verde-oliva);
-      }
-
-      .local-evento-elegante {
-        font-style: italic;
-        margin-bottom: 18px;
-        color: var(--cinza-medio);
-        font-size: 1.15rem;
-      }
-
-      .btn-mapa-elegante {
-        background: transparent;
-        color: var(--verde-oliva);
-        border: 1.5px solid var(--verde-oliva);
-        padding: 9px 22px;
-        border-radius: 50px;
-        cursor: pointer;
-        font-family: "Cormorant Garamond", serif;
-        font-size: 1.05rem;
-        font-weight: 600;
-        transition: all 0.4s ease;
-        display: inline-flex;
-        align-items: center;
-        gap: 7px;
-        text-decoration: none;
-      }
-
-      .btn-mapa-elegante:hover {
-        background-color: var(--verde-oliva);
-        color: var(--branco);
-        transform: translateY(-3px);
-        box-shadow: 0 8px 18px var(--sombra-suave);
-      }
-
+.btn-mapa-elegante:hover {
+  background-color: var(--verde-oliva);
+  color: var(--branco);
+  transform: translateY(-3px);
+}
       /* CONTADOR - SCROLL 7 */
       #contador {
   background: #ffffff;
@@ -2092,17 +2053,17 @@
         margin-bottom: 30px;
       }
 
-      .item-presente {
-        background-color: var(--creme-claro);
-        border-radius: 10px;
-        padding: 15px 20px;
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-        transition: all 0.3s ease;
-        border-left: 4px solid var(--dourado);
-      }
-
+    .item-presente {
+  background-color: var(--creme-claro);
+  border-radius: 10px;
+  padding: 15px 20px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  transition: all 0.3s ease;
+  border-left: 6px solid #e8c49a !important;  /* ← com !important para forçar */
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+}
       .item-presente span {
         font-size: 1.2rem;
         color: var(--cinza-escuro);
@@ -2197,82 +2158,38 @@
     padding: 8px 0;
   }
 }
-/* BOTÃO FLUTUANTE DE MÚSICA */
-.botao-musica-flutuante {
-  position: fixed;
-  bottom: 30px;
-  right: 30px;
-  width: 55px;
-  height: 55px;
-  background: linear-gradient(135deg, var(--verde-oliva), var(--verde-oliva-suave));
-  border-radius: 50%;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  cursor: pointer;
-  z-index: 99999;
-  pointer-events: auto; 
-  box-shadow: 0 5px 20px rgba(0, 0, 0, 0.3);
-  transition: all 0.3s ease;
-  border: 2px solid var(--dourado);
-  animation: pulsarBotao 1.5s infinite ease-in-out;
+/* FORÇAR BOTÃO FLUTUANTE - ÚLTIMO RECURSO */
+#botaoMusica {
+  position: fixed !important;
+  bottom: 20px !important;
+  right: 20px !important;
+  width: 55px !important;
+  height: 55px !important;
+  background: linear-gradient(135deg, #6d4830, #8b5e3c) !important;
+  border-radius: 50% !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  cursor: pointer !important;
+  z-index: 9999999 !important;
+  border: 2px solid #c9a03d !important;
+  box-shadow: 0 5px 20px rgba(0,0,0,0.3) !important;
+  margin: 0 !important;
+  padding: 0 !important;
+  transform: none !important;
+  top: auto !important;
+  left: auto !important;
 }
 
-.botao-musica-flutuante:hover {
-  transform: scale(1.1);
-  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.4);
+#botaoMusica i {
+  font-size: 1.8rem !important;
+  color: white !important;
 }
-
-.botao-musica-flutuante i {
-  font-size: 1.8rem;
-  color: white;
-  transition: all 0.3s ease;
-}
-
-@keyframes pulsarBotao {
-  0%, 100% {
-    transform: scale(1);
-    box-shadow: 0 5px 20px rgba(0, 0, 0, 0.3);
-  }
-  50% {
-    transform: scale(1.08);
-    box-shadow: 0 5px 30px rgba(212, 175, 55, 0.5);
-  }
-}
-
 /* Esconder o botão antigo de tocar música */
 #btnTocarMusica {
   display: none !important;
 }
-/* ÍCONE PULSANTE ACIMA DO TÍTULO */
-.icone-pulsante {
-  text-align: center;
-  margin-bottom: 20px;
-  animation: pulsarConvite 1.5s infinite ease-in-out;
-}
 
-.icone-pulsante i {
-  font-size: 3.5rem;
-  color: var(--verde-oliva);
-  /* REMOVER o background e o padding e o border-radius */
-}
-
-@keyframes pulsarConvite {
-  0%, 100% {
-    transform: scale(1);
-    opacity: 0.8;
-  }
-  50% {
-    transform: scale(1.1);
-    opacity: 1;
-  }
-}
-
-@media (max-width: 768px) {
-  .icone-pulsante i {
-    font-size: 2.5rem;
-  }
-}
 /* ANIMAÇÃO SEJA BEM-VINDO - APARECER GRADUALMENTE */
 .bem-vindo-container {
   text-align: center;
@@ -2884,29 +2801,125 @@
   opacity: 1;
   transform: translateY(0);
 }
+/* Botão RSVP personalizado */
+.btn-rsvp-elegante {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  background: linear-gradient(135deg, var(--creme-claro), white);
+  border: 1.5px solid var(--verde-oliva-claro);
+  color: var(--verde-oliva);
+  padding: 14px 35px;
+  font-size: 1.2rem;
+  font-weight: 600;
+  font-family: "Cormorant Garamond", serif;
+  text-decoration: none;
+  border-radius: 50px;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+  transition: all 0.4s cubic-bezier(0.19, 1, 0.22, 1);
+  letter-spacing: 1px;
+  cursor: pointer;
+}
+
+.btn-rsvp-elegante i {
+  font-size: 1.4rem;
+  color: #25d366;
+  transition: transform 0.3s ease;
+}
+
+.btn-rsvp-elegante:hover {
+  transform: translateY(-5px);
+  border-color: var(--dourado);
+  background: linear-gradient(135deg, white, var(--creme-claro));
+  box-shadow: 0 12px 25px rgba(0, 0, 0, 0.1);
+  letter-spacing: 1.5px;
+}
+
+.btn-rsvp-elegante:hover i {
+  transform: scale(1.1);
+}
+/* ESTILOS ACROMÁTICOS PARA A LISTA DE PRESENTES */
+/* Este bloco está mal formatado e pode estar a causar erros */
+.item-presente {
+  background-color: #f9f9f9;
+  border-left: 4px solid #92743c;
+  color: #333;
+}
+
+.item-presente span {
+  color: #222;
+}
+
+.titulo-categoria {
+  color: #444 !important;
+  border-bottom-color: #bbb !important;
+}
+
+.aviso-unico-presente {
+  background-color: #f0f0f0;
+  border-left-color: #888;
+  color: #333;
+}
+
+.btn-mapa-localizacao:hover {
+  background: #555;
+  transform: translateY(-3px);
+}
+/* FORÇAR RODAPÉ A OCUPAR TODA A LARGURA */
+#rodape {
+  width: 100vw !important;
+  max-width: 100% !important;
+  margin: 0 !important;
+  padding: 60px 20px !important;
+  left: 0 !important;
+  right: 0 !important;
+  position: relative !important;
+}
+
+#rodape .conteudo-secao {
+  max-width: 900px !important;
+  width: 100% !important;
+  margin: 0 auto !important;
+}
+/* Esconder botão de música na capa inicial */
+#capa ~ #botaoMusica,
+#capa.oculto ~ #botaoMusica {
+  display: flex !important;
+}
+
+#botaoMusica {
+  display: flex !important;
+}
+
+/* Quando a capa está visível, esconder o botão */
+body:has(#capa:not(.oculto)) #botaoMusica {
+  display: none !important;
+}
 </style>
   </head>
 
   <body>
-    <!-- CAPA - ENVELOPE NOVO -->
-<section id="capa" class="secao visivel" style="background: #f3ebe1; padding: 0; margin: 0; display: flex; justify-content: center; align-items: center; min-height: 100vh;">
-  <div style="position: relative; width: 100%; max-width: 100%; height: 100vh; overflow: hidden; background: #f3ebe1; perspective: 1300px;">
+  <!-- CAPA - ENVELOPE 3D VERSÃO FINAL -->
+<section id="capa" class="secao visivel" style="background: #efe4de; padding: 0; margin: 0; display: flex; justify-content: center; align-items: center; min-height: 100vh; overflow: hidden;">
+  
+  <div style="position: relative; width: 100%; max-width: 380px; margin: 0 auto; perspective: 1200px;">
     
-    <!-- Base -->
-    <div style="position: absolute; bottom: 0; left: 0; width: 100%; z-index: 1;">
-      <img src="base.png" style="width: 100%; height: 350px; object-fit: cover; object-position: top; display: block;" />
+    <!-- BASE DO ENVELOPE -->
+    <div style="position: relative; width: 100%; z-index: 5;">
+      <img src="base.png" alt="Base do envelope" style="width: 100%; height: auto; display: block;" />
     </div>
-
-    <!-- Aba -->
-    <div id="envelopeFlap" style="position: absolute; top: 150px; left: 0; width: 100%; height: 350px; z-index: 20; transform-origin: top center; transform-style: preserve-3d; backface-visibility: hidden; transition: transform 4.5s cubic-bezier(0.22, 1, 0.36, 1); transform: perspective(1300px) rotateX(10deg);">
-      <img src="aba.png" style="width: 100%; height: 350px; object-fit: cover; object-position: bottom; display: block;" />
+    
+    <!-- ABA DO ENVELOPE -->
+    <div id="envelopeFlap" style="position: absolute; top: -19%; left: 0; width: 100%; z-index: 20; transform-origin: top center; transition: transform 3.0s cubic-bezier(0.4, 0, 0.2, 1); transform-style: preserve-3d;">
+      <img src="aba.png" alt="Aba do envelope" style="width: 100%; height: auto; display: block; transform: scaleY(2.0) scaleX(2.0); transform-origin: top center;" />
     </div>
-
-    <!-- Selo -->
-    <div id="waxSeal" style="position: absolute; top: 62%; left: 50%; transform: translateX(-50%); width: 100px; height: 100px; z-index: 50; cursor: pointer;">
-      <img src="selo.png" style="width: 100%; height: 100%; object-fit: contain;" />
+    
+    <!-- SELO -->
+    <div id="waxSeal" style="position: absolute !important; top: 56% !important; left: 50% !important; transform: translate(-50%, -50%) !important; width: 200px !important; height: 200px !important; z-index: 30 !important; cursor: pointer !important;">
+      <img src="selo.png" alt="Selo" style="width: 100%; height: 100%; object-fit: contain; filter: drop-shadow(0 4px 8px rgba(0,0,0,0.2));" />
     </div>
-
+    
   </div>
 </section>
 <!-- CONTRACAPA -->
@@ -2945,7 +2958,7 @@
             <div class="moldura-principal">
               <img
                 src="Foto2.jpeg"
-                alt="Nunu e Nicole"
+                alt="Nuno e Nicole"
                 class="foto-casal-principal"
               />
             </div>
@@ -3092,27 +3105,56 @@
         </div>
       </section>
 
-      <!-- AGENDA - SCROLL 6 -->
+     <!-- AGENDA - SCROLL 6 -->
 <section id="agenda" class="secao">
   <div class="conteudo-secao">
     <h2>Nosso Dia Especial</h2>
     <div class="timeline-elegante">
       
-      <!-- Cerimónia Religiosa e Civil -->
+      <!-- Cerimónia Religiosa -->
       <div class="evento-elegante">
         <div class="circulo-tempo"></div>
         <div class="icone-evento-elegante">
           <i class="fas fa-church"></i>
         </div>
         <div class="info-evento-elegante">
-          <div class="hora-evento-elegante">11h00</div>
-          <div class="titulo-evento-elegante">Cerimónia Religiosa & Civil</div>
-          <div class="local-evento-elegante">Igreja Assembleia de Deus - Pandora</div>
-          <button
-            class="btn-mapa-elegante"
-            onclick="window.open('https://share.google/bTFKDJrwLrb3OQVUt', '_blank')"
-          >
-            <i class="fas fa-map-marker-alt"></i> Ver localização
+          <div class="hora-evento-elegante">10h00</div>
+          <div class="titulo-evento-elegante">Cerimónia Religiosa</div>
+          <div class="local-evento-elegante">Igreja de Nossa Senhora da Conceição</div>
+          <button class="btn-mapa-elegante" onclick="window.open('https://maps.app.goo.gl/4WEVYwTd4rvd745u7?g_st=aw', '_blank')">
+            <i class="fas fa-map-marker-alt"></i> Ver no mapa
+          </button>
+        </div>
+      </div>
+
+      <!-- Cerimónia Civil -->
+      <div class="evento-elegante">
+        <div class="circulo-tempo"></div>
+        <div class="icone-evento-elegante">
+          <i class="fas fa-gavel"></i>
+        </div>
+        <div class="info-evento-elegante">
+          <div class="hora-evento-elegante">10h00</div>
+          <div class="titulo-evento-elegante">Cerimónia Civil</div>
+          <div class="local-evento-elegante">Igreja de Nossa Senhora da Conceição</div>
+          <button class="btn-mapa-elegante" onclick="window.open('https://maps.app.goo.gl/4WEVYwTd4rvd745u7?g_st=aw', '_blank')">
+            <i class="fas fa-map-marker-alt"></i> Ver no mapa
+          </button>
+        </div>
+      </div>
+
+      <!-- Cocktail Hour -->
+      <div class="evento-elegante">
+        <div class="circulo-tempo"></div>
+        <div class="icone-evento-elegante">
+          <i class="fas fa-glass-cheers"></i>
+        </div>
+        <div class="info-evento-elegante">
+          <div class="hora-evento-elegante">13h30</div>
+          <div class="titulo-evento-elegante">Cocktail Hour</div>
+          <div class="local-evento-elegante">Salão de Festas El Dourado</div>
+          <button class="btn-mapa-elegante" onclick="window.open('https://maps.app.goo.gl/B7L9gYVqHmhbyR1i6?g_st=aw', '_blank')">
+            <i class="fas fa-map-marker-alt"></i> Ver no mapa
           </button>
         </div>
       </div>
@@ -3121,21 +3163,33 @@
       <div class="evento-elegante">
         <div class="circulo-tempo"></div>
         <div class="icone-evento-elegante">
-          <i class="fas fa-glass-cheers"></i>
+          <i class="fas fa-champagne-glasses"></i>
         </div>
         <div class="info-evento-elegante">
-          <div class="hora-evento-elegante">15h00</div>
+          <div class="hora-evento-elegante">16h00</div>
           <div class="titulo-evento-elegante">Copo d'Água</div>
-          <div class="local-evento-elegante">Casa Mafurra</div>
-          <button
-            class="btn-mapa-elegante"
-            onclick="window.open('https://maps.app.goo.gl/ooFDzw4skvBkxadq8', '_blank')"
-          >
-            <i class="fas fa-map-marker-alt"></i> Ver localização
+          <div class="local-evento-elegante">Salão de Festas El Dourado</div>
+          <button class="btn-mapa-elegante" onclick="window.open('https://maps.app.goo.gl/B7L9gYVqHmhbyR1i6?g_st=aw', '_blank')">
+            <i class="fas fa-map-marker-alt"></i> Ver no mapa
           </button>
         </div>
       </div>
-      
+
+      <!-- Corte do Bolo -->
+      <div class="evento-elegante">
+        <div class="circulo-tempo"></div>
+        <div class="icone-evento-elegante">
+          <i class="fas fa-cake-candles"></i>
+        </div>
+        <div class="info-evento-elegante">
+          <div class="titulo-evento-elegante">Corte do Bolo</div>
+          <div class="local-evento-elegante">Salão de Festas El Dourado</div>
+          <button class="btn-mapa-elegante" onclick="window.open('https://maps.app.goo.gl/B7L9gYVqHmhbyR1i6?g_st=aw', '_blank')">
+            <i class="fas fa-map-marker-alt"></i> Ver no mapa
+          </button>
+        </div>
+      </div>
+
     </div>
   </div>
 </section>
@@ -3243,7 +3297,7 @@
             >
               <img
                 src="Foto4.jpeg"
-                alt="Nunu e Nicole"
+                alt="Nuno e Nicole"
                 class="galeria-img-elegante"
               />
               <div class="galeria-overlay">
@@ -3257,7 +3311,7 @@
             >
               <img
                 src="Capa.jpeg"
-                alt="Nunu e Nicole"
+                alt="Nuno e Nicole"
                 class="galeria-img-elegante"
               />
               <div class="galeria-overlay">
@@ -3265,7 +3319,7 @@
               </div>
             </div>
             <div class="galeria-item-elegante" onclick="abrirModal(3)" style="--item-index: 3">
-    <img src="Foto5.jpeg" alt="Nunu e Nicole" class="galeria-img-elegante" />
+    <img src="Foto5.jpeg" alt="Nuno e Nicole" class="galeria-img-elegante" />
     <div class="galeria-overlay">
       <i class="fas fa-search-plus"></i>
     </div>
@@ -3283,19 +3337,42 @@
         Por favor, confirme sua presença até 3 de Julho de 2026
       </p>
       
-      <!-- BOTÃO ÚNICO WHATSAPP -->
+      <!-- Campo para o nome -->
+      <div style="margin-bottom: 20px; text-align: left;">
+        <label for="nomeConvidado" style="display: block; font-size: 1.1rem; color: var(--verde-oliva); margin-bottom: 8px; font-weight: 600;">
+          O seu nome:
+        </label>
+        <input type="text" id="nomeConvidado" placeholder="Digite o seu nome completo" 
+               style="width: 100%; padding: 12px 15px; font-size: 1rem; font-family: 'Cormorant Garamond', serif; border: 1.5px solid var(--verde-oliva-claro); border-radius: 8px; background: rgba(255,255,255,0.8);">
+      </div>
+      
+      <!-- Opções de status -->
+      <div style="margin-bottom: 25px; text-align: left;">
+        <label style="display: block; font-size: 1.1rem; color: var(--verde-oliva); margin-bottom: 8px; font-weight: 600;">
+          Status:
+        </label>
+        <div style="display: flex; gap: 20px; flex-wrap: wrap;">
+          <label style="display: flex; align-items: center; gap: 8px; cursor: pointer;">
+            <input type="radio" name="statusPresenca" value="Sim, estarei presente" checked style="width: 18px; height: 18px; accent-color: #25d366;">
+            <span style="font-size: 1.1rem;">✅ Sim, estarei presente</span>
+          </label>
+          <label style="display: flex; align-items: center; gap: 8px; cursor: pointer;">
+            <input type="radio" name="statusPresenca" value="Não poderei estar disponível" style="width: 18px; height: 18px; accent-color: #e74c3c;">
+            <span style="font-size: 1.1rem;">❌ Não poderei estar disponível</span>
+          </label>
+        </div>
+      </div>
+      
+      <!-- Botão de confirmação -->
       <div style="display: flex; justify-content: center;">
-        <a href="https://wa.me/258866660815?text=Olá, confirmo a minha presença no vosso casamento Nicole e Nuno, no dia 22 de Agosto de 2026." 
-           class="btn-whatsapp-elegante" 
-           target="_blank"
-           style="background: linear-gradient(135deg, #25d366, #1da851);">
-          <i class="fab fa-whatsapp"></i> Confirmar Presença
-        </a>
+        <button id="btnConfirmarWhatsapp" class="btn-rsvp-elegante">
+          <i class="fab fa-whatsapp"></i> 
+          <span>Confirmar Presença</span>
+        </button>
       </div>
     </div>
   </div>
 </section>
-
       <!-- MENSAGENS - SCROLL 10 (COM SISTEMA DE ABAS) -->
       <section id="mensagens" class="secao">
         <div class="conteudo-secao">
@@ -3412,87 +3489,133 @@
 </button>
           </div>
 
-          <!-- LISTA DE PRESENTES MATERIAIS (inicialmente escondida) -->
           <div id="listaPresentesContainer" style="display: none">
-            <!-- BOTÃO FECHAR -->
-            <div style="text-align: right; margin-bottom: 15px">
-              <button
-                onclick="fecharListaPresentes()"
-                style="
-                  background: transparent;
-                  border: none;
-                  font-size: 2rem;
-                  cursor: pointer;
-                  color: var(--cinza-medio);
-                "
-              >
-                <i class="fas fa-times-circle"></i>
-              </button>
-            </div>
-            <div class="aviso-unico-presente">
-              <i class="fas fa-info-circle"></i>
-              <strong>IMPORTANTE:</strong> ⚠️De forma a organizar melhor os presentes cada convidado pode escolher e SELECIONAR pelo menos um (1) 
-              presente. Porque após escolher, o item ficará marcado como "Já
-              escolhido".
-            </div>
-
-            <!-- CATEGORIA 1: MESA POSTA -->
-<div class="categoria-presentes">
-  <div class="titulo-categoria">
-    🍽️ Mesa Posta
+  <!-- BOTÃO FECHAR -->
+  <div style="text-align: right; margin-bottom: 15px">
+    <button onclick="fecharListaPresentes()" style="background: transparent; border: none; font-size: 2rem; cursor: pointer; color: var(--cinza-medio);">
+      <i class="fas fa-times-circle"></i>
+    </button>
   </div>
-  <div class="lista-presentes" id="categoria-mesa"></div>
-</div>
-
-<!-- CATEGORIA 2: COZINHA (UTENSÍLIOS) -->
-<div class="categoria-presentes">
-  <div class="titulo-categoria">
-    <img src="cocina.png" alt="Cozinha" style="width: 35px; height: auto; vertical-align: middle; margin-right: 10px;">
-    Cozinha (Utensílios)
+  
+  <!-- AVISO IMPORTANTE -->
+  <div class="aviso-unico-presente" style="background: #f5f5f5; border-left-color: #999; color: #333;">
+    <i class="fas fa-info-circle"></i>
+    <strong>SUGESTÃO:</strong> Sugerimos ver opções de presentes na <strong>Casa das Loiças</strong>
   </div>
-  <div class="lista-presentes" id="categoria-cozinha"></div>
-</div>
-
-<!-- CATEGORIA 3: MOBILIÁRIO E TÊXTEIS -->
-<div class="categoria-presentes">
-  <div class="titulo-categoria">
-    <img src="mobilia.png" alt="Mobiliário" style="width: 35px; height: auto; vertical-align: middle; margin-right: 10px;">
-    Mobiliário e Têxteis
+  
+  <!-- BOTÃO VER LOCALIZAÇÃO -->
+  <div style="text-align: center; margin-bottom: 30px;">
+    <a href="https://maps.app.goo.gl/iUHvyUHRRPMD9spS9" target="_blank" class="btn-mapa-localizacao" style="display: inline-flex; align-items: center; gap: 10px; background: #333; color: white; padding: 12px 25px; border-radius: 50px; text-decoration: none; font-family: 'Cormorant Garamond', serif; font-weight: 600; transition: all 0.3s ease;">
+      <i class="fas fa-map-marker-alt"></i> Ver Localização
+    </a>
   </div>
-  <div class="lista-presentes" id="categoria-mobilia"></div>
+  
+  <!-- CATEGORIA 1: MESA POSTA -->
+  <div class="categoria-presentes">
+    <div class="titulo-categoria" style="color: #555; border-bottom-color: #ccc;">
+      🍽️ Mesa Posta
+    </div>
+    <div class="lista-presentes" id="categoria-mesa"></div>
+  </div>
+
+  <!-- CATEGORIA 2: COZINHA (UTENSÍLIOS) -->
+  <div class="categoria-presentes">
+    <div class="titulo-categoria" style="color: #555; border-bottom-color: #ccc;">
+      <img src="cocina.png" alt="Cozinha" style="width: 35px; height: auto; vertical-align: middle; margin-right: 10px; filter: grayscale(100%);">
+      Cozinha (Utensílios)
+    </div>
+    <div class="lista-presentes" id="categoria-cozinha"></div>
+  </div>
+
+  <!-- CATEGORIA 3: MOBILIÁRIO E TÊXTEIS -->
+  <div class="categoria-presentes">
+    <div class="titulo-categoria" style="color: #555; border-bottom-color: #ccc;">
+      <img src="mobilia.png" alt="Mobiliário" style="width: 35px; height: auto; vertical-align: middle; margin-right: 10px; filter: grayscale(100%);">
+      Mobiliário e Têxteis
+    </div>
+    <div class="lista-presentes" id="categoria-mobilia"></div>
+  </div>
 </div>
-          </div>
+      <!-- RODAPÉ - MANUAL DO BOM CONVIDADO -->
+<section id="rodape" class="secao" style="width: 100vw; max-width: 100%; margin: 0; padding: 60px 20px; background: #4a3320; min-height: 100vh; display: flex; align-items: center; justify-content: center; left: 0; right: 0; position: relative;">
+  <div class="conteudo-secao" style="max-width: 900px; width: 100%; margin: 0 auto;">
+    
+    <!-- TÍTULO PRINCIPAL -->
+    <h2 style="color: white; font-family: 'Playfair Display', serif; margin-bottom: 50px; text-align: center;">
+      📖 Manual do Bom Convidado
+    </h2>
+    
+    <!-- PRIMEIRA LINHA (2 itens) -->
+    <div style="display: flex; flex-wrap: wrap; justify-content: center; gap: 60px; margin-bottom: 50px;">
+      
+      <!-- Item 1: Convidado não convida -->
+      <div style="text-align: center; width: 220px;">
+        <div style="background: rgba(255,255,255,0.1); width: 80px; height: 80px; border-radius: 50%; display: flex; align-items: center; justify-content: center; margin: 0 auto 15px;">
+          <i class="fas fa-user-plus" style="font-size: 2.2rem; color: #c9a03d;"></i>
         </div>
-      </section>
-
-      <!-- RODAPÉ - SCROLL FINAL -->
-<section id="rodape" class="secao">
-  <div class="conteudo-secao">
-    <p class="assinatura-elegante">Com amor,</p>
-    <h1 style="color: white; font-family: 'Parisienne', cursive; font-size: 3rem; margin-bottom: 10px;">
-      Nuno & Nicole
-    </h1>
-
-    <div class="iniciais-elegante">N ♡ N</div>
-
-    <p style="color: rgba(255, 255, 255, 0.9); font-size: 1.2rem; margin: 20px 0;">
-      Um convite digital para o casamento de Edmilson e Farida <br />por
-      Convites Dourados MZ
+        <p style="margin: 0;">
+          <strong style="color: white; font-size: 1rem;"> Convidado não convida</strong><br>
+          <span style="color: white; font-size: 0.9rem;">O convite é pessoal e intransferível</span>
+        </p>
+      </div>
+      
+      <!-- Item 2: Seja pontual -->
+      <div style="text-align: center; width: 220px;">
+        <div style="background: rgba(255,255,255,0.1); width: 80px; height: 80px; border-radius: 50%; display: flex; align-items: center; justify-content: center; margin: 0 auto 15px;">
+          <i class="fas fa-calendar-check" style="font-size: 2.2rem; color: #c9a03d;"></i>
+        </div>
+        <p style="margin: 0;">
+          <strong style="color: white; font-size: 1rem;">Seja pontual</strong><br>
+          <span style="color: white; font-size: 0.9rem;">A cerimónia começa às 10h00</span>
+        </p>
+      </div>
+      
+    </div>
+    
+    <!-- SEGUNDA LINHA (2 itens) -->
+    <div style="display: flex; flex-wrap: wrap; justify-content: center; gap: 60px; margin-bottom: 50px;">
+      
+      <!-- Item 3: Tire muitas fotos -->
+      <div style="text-align: center; width: 220px;">
+        <div style="background: rgba(255,255,255,0.1); width: 80px; height: 80px; border-radius: 50%; display: flex; align-items: center; justify-content: center; margin: 0 auto 15px;">
+          <i class="fas fa-camera" style="font-size: 2.2rem; color: #c9a03d;"></i>
+        </div>
+        <p style="margin: 0;">
+          <strong style="color:white; font-size: 1rem;">Tire muitas fotos</strong><br>
+          <span style="color: white; font-size: 0.9rem;">Capture os melhores momentos</span>
+        </p>
+      </div>
+      
+      <!-- Item 4: Aproveite a festa -->
+      <div style="text-align: center; width: 220px;">
+        <div style="background: rgba(255,255,255,0.1); width: 80px; height: 80px; border-radius: 50%; display: flex; align-items: center; justify-content: center; margin: 0 auto 15px;">
+          <i class="fas fa-glass-cheers" style="font-size: 2.2rem; color: #c9a03d;"></i>
+        </div>
+        <p style="margin: 0;">
+          <strong style="color: white; font-size: 1rem;">Aproveite a festa</strong><br>
+          <span style="color: white; font-size: 0.9rem;">Dance, celebre e seja feliz</span>
+        </p>
+      </div>
+      
+    </div>
+    
+    <!-- LINHA DIVISÓRIA -->
+    <div style="width: 100px; height: 2px; background: linear-gradient(90deg, transparent, #c9a03d, transparent); margin: 40px auto;"></div>
+    
+    <!-- NOMES DOS NOIVOS -->
+    <p style="color: white; font-size: 1rem; margin: 20px 0; text-align: center;">
+      Um convite digital para o casamento de <strong style="color: #c9a03d;">Nicole & Nuno</strong><br>
+      por Convites Dourados MZ
     </p>
-
-    <!-- MÚSICA DO RODAPÉ -->
-    <p style="color: var(--dourado-claro); font-size: 1rem; margin: 15px 0; font-style: italic;">
-  🎶 Música: TEEKS - First Time
-</p>
-
-    <img src="logoCD.jpg" alt="Convites Dourados MZ" class="logo-rodape-elegante" style="max-width: 100px;" />
-
-    <a href="https://www.instagram.com/convitedouradomz" class="instagram-texto" target="_blank">
+    
+    <img src="logoCD.jpg" alt="Convites Dourados MZ" style="max-width: 80px; margin: 20px auto; display: block;" />
+    
+    <a href="https://www.instagram.com/convitedouradomz" class="instagram-texto" target="_blank" style="font-size: 1rem; padding: 8px 25px; display: inline-block; margin: 10px auto; text-align: center;">
       <i class="fab fa-instagram"></i>
       @convitedouradomz
     </a>
-
-    <p class="texto-rodape-elegante">© Todos os direitos reservados.</p>
+    
+    <p style="font-size: 0.8rem; color: rgba(255,255,255,0.6); text-align: center; margin-top: 30px;">© Todos os direitos reservados.</p>
   </div>
 </section>
 
@@ -3515,8 +3638,8 @@
           <i class="fas fa-mobile-alt"></i>
           <div>
             <strong style="font-size: 1.2rem">M-Pesa</strong><br />
-            <span style="font-size: 1.1rem">+258 84 4747730</span><br />
-            <em style="color: var(--cinza-medio)">(Titular: Rafaela Camila</em>
+            <span style="font-size: 1.1rem">+258 84 8636891</span><br />
+            <em style="color: var(--cinza-medio)">(Titular: Nuno Manhiça</em>
           </div>
         </div>
 
@@ -3533,8 +3656,9 @@
   <i class="fas fa-university"></i>
   <div>
     <strong style="font-size: 1.2rem">MBIM</strong><br />
-    <span style="font-size: 1rem"> <strong>Número de Conta:</strong> 31298873710001</span><br />
-    <span style="font-size: 1rem"> <strong>NIB:</strong> 0008000072978873710828</span><br />
+    <span style="font-size: 1rem"> <strong>Número de Conta:</strong> 574220698</span><br />
+    <span style="font-size: 1rem"> <strong>NIB:</strong>000100000057422069857</span><br />
+     <em style="color: var(--cinza-medio)">(Titular: Nicole Checo)</em>
   </div>
 </div>
       </div>
@@ -3788,11 +3912,10 @@ if (waxSeal) {
       setTimeout(() => tocarMusica(), 500);
 
       setTimeout(() => {
-        conteudoPrincipal.classList.remove("oculto");
-        conteudoPrincipal.style.opacity = "1";
-      }, 2000);
-
-    }, 800); // espera a aba abrir
+  conteudoPrincipal.classList.remove("oculto");
+  conteudoPrincipal.style.opacity = "1";
+}, 2000);
+}, 800);
   });
 }
       // Animação de aparecimento das seções
@@ -3847,23 +3970,44 @@ if (waxSeal) {
         }
       }
 
-      // ANIMAÇÃO ESPECÍFICA PARA AGENDA
-      function animarAgendaAoScroll() {
-        const eventos = document.querySelectorAll(".evento-elegante");
-        const alturaJanela = window.innerHeight;
-        const triggerPoint = alturaJanela * 0.8;
+    // ANIMAÇÃO DA AGENDA - VERSÃO CORRIGIDA E FORÇADA
+// ANIMAÇÃO ESPECÍFICA PARA AGENDA
 
-        eventos.forEach((evento, index) => {
-          const topoEvento = evento.getBoundingClientRect().top;
-
-          if (topoEvento < triggerPoint) {
-            setTimeout(() => {
-              evento.classList.add("visivel");
-            }, index * 300);
-          }
-        });
+function animarAgendaAoScroll() {
+  const eventos = document.querySelectorAll(".evento-elegante");
+  
+  eventos.forEach((evento) => {
+    const rect = evento.getBoundingClientRect();
+    const alturaJanela = window.innerHeight;
+    
+    // Se o evento estiver visível no ecrã e ainda não tiver a classe
+    if (rect.top < alturaJanela - 100 && rect.bottom > 0 && !evento.classList.contains("visivel")) {
+      evento.classList.add("visivel");
+      console.log("Evento visível, adicionando classe");
+    }
+  });
+}
+// OBSERVADOR - SÓ ATIVA QUANDO A SECÇÃO APARECER
+function iniciarObservadorAgenda() {
+  const agendaSecao = document.getElementById("agenda");
+  if (!agendaSecao) {
+    console.error("Secção agenda não encontrada");
+    return;
+  }
+  
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        console.log("🎯 Secção 'Nosso Dia Especial' está visível! Iniciando animação...");
+        animarAgendaAoScroll();
+        observer.disconnect();
       }
-
+    });
+  }, { threshold: 0.3 });
+  
+  observer.observe(agendaSecao);
+  console.log("✅ Observador da agenda configurado");
+}
       // Contador regressivo
       // Contador regressivo com mensagens especiais
       function atualizarContador() {
@@ -4024,7 +4168,6 @@ document.getElementById("modalGaleria")?.addEventListener("click", function(e) {
       document
         .getElementById("btnPresentesMateriais")
         .addEventListener("click", function () {
-          abrirModalPresente("modalPresentesMateriais");
         });
 
       function abrirModalPresente(idModal) {
@@ -4165,9 +4308,14 @@ document.getElementById("modalGaleria")?.addEventListener("click", function(e) {
       });
 
       window.addEventListener("load", function () {
-        verificarSecoesVisiveis();
-        atualizarContador();
-        setInterval(atualizarContador, 1000);
+  console.log("✅ Página carregada!");
+  
+  verificarSecoesVisiveis();
+  
+ // ← ISTO é o que ativa a animação quando scrollar
+  
+  atualizarContador();
+  setInterval(atualizarContador, 1000);
 
         // Carregar mensagens iniciais
         if (!localStorage.getItem("mensagensCasamento")) {
@@ -4218,184 +4366,75 @@ document.getElementById("modalGaleria")?.addEventListener("click", function(e) {
   ],
   mobilia: ["Cama", "Mesa de jantar", "Raque (Rack para TV)"],
 };
+      
 
-      // Chave para salvar no localStorage
-      const STORAGE_KEY_PRESENTES = "presentesEscolhidosCasamento";
+         // Função para renderizar a lista de presentes (apenas visual, sem botões)
+function renderizarListaPresentes() {
+  // Renderizar Mobiliário
+  const containerMobilia = document.getElementById("categoria-mobilia");
+  if (containerMobilia) {
+    containerMobilia.innerHTML = listaPresentesCompleta.mobilia
+      .map((presente) => `<div class="item-presente"><span>${presente}</span></div>`)
+      .join("");
+  }
 
-      // Carregar presentes já escolhidos
-      let presentesEscolhidos =
-        JSON.parse(localStorage.getItem(STORAGE_KEY_PRESENTES)) || [];
+  // Renderizar Cozinha
+  const containerCozinha = document.getElementById("categoria-cozinha");
+  if (containerCozinha) {
+    containerCozinha.innerHTML = listaPresentesCompleta.cozinha
+      .map((presente) => `<div class="item-presente"><span>${presente}</span></div>`)
+      .join("");
+  }
 
-      // Verificar se o usuário já escolheu um presente (por sessão)
-      let usuarioEscolheu =
-        localStorage.getItem("usuarioJaEscolheu") === "true";
+  // Renderizar Mesa Posta
+  const containerMesa = document.getElementById("categoria-mesa");
+  if (containerMesa) {
+    containerMesa.innerHTML = listaPresentesCompleta.mesa
+      .map((presente) => `<div class="item-presente"><span>${presente}</span></div>`)
+      .join("");
+  }
+}
 
-      // Função para salvar escolhas
-      function salvarPresentesEscolhidos() {
-        localStorage.setItem(
-          STORAGE_KEY_PRESENTES,
-          JSON.stringify(presentesEscolhidos),
-        );
-      }
+// Controle de abas dos presentes (Monetário vs Lista)
+document
+  .getElementById("btnPresenteMonetario")
+  ?.addEventListener("click", function () {
+    document.getElementById("listaPresentesContainer").style.display = "none";
+    abrirModalPresente("modalPresenteMonetario");
+  });
 
-      // Função para verificar se um presente está escolhido
-      function isPresenteEscolhido(presente) {
-        return presentesEscolhidos.includes(presente);
-      }
+document
+  .getElementById("btnPresentesMateriais")
+  ?.addEventListener("click", function () {
+    const container = document.getElementById("listaPresentesContainer");
+    if (container.style.display === "none") {
+      container.style.display = "block";
+      renderizarListaPresentes();
+      const overlay = document.getElementById("overlay");
+      if (overlay) overlay.classList.remove("ativo");
+      container.scrollIntoView({ behavior: "smooth", block: "start" });
+    } else {
+      container.style.display = "none";
+    }
+  });
 
-      // Função para marcar presente como escolhido
-      function escolherPresente(presente) {
-        if (usuarioEscolheu) {
-          alert(
-            "❌ Você já escolheu um presente! Cada convidado pode escolher apenas 1 presente.",
-          );
-          return false;
-        }
+// Inicializar renderização se o container estiver visível
+if (
+  document.getElementById("listaPresentesContainer") &&
+  document.getElementById("listaPresentesContainer").style.display !== "none"
+) {
+  renderizarListaPresentes();
+}
 
-        if (isPresenteEscolhido(presente)) {
-          alert(
-            `❌ O presente "${presente}" já foi escolhido por outro convidado. Por favor, escolha outro.`,
-          );
-          return false;
-        }
-
-        // Confirmar escolha
-        if (
-          confirm(
-            `✅ Confirmar que você quer presentear os noivos com: "${presente}"?`,
-          )
-        ) {
-          presentesEscolhidos.push(presente);
-          salvarPresentesEscolhidos();
-          usuarioEscolheu = true;
-          localStorage.setItem("usuarioJaEscolheu", "true");
-
-          // Mostrar mensagem de agradecimento
-          const msgDiv = document.getElementById("mensagemEscolha");
-          if (msgDiv) {
-            msgDiv.style.display = "block";
-            msgDiv.innerHTML = `<i class="fas fa-check-circle"></i> Obrigado! Você escolheu: <strong>${presente}</strong>. ❤️`;
-            setTimeout(() => {
-              msgDiv.style.opacity = "0";
-              setTimeout(() => {
-                msgDiv.style.display = "none";
-                msgDiv.style.opacity = "1";
-              }, 1000);
-            }, 3000);
-          }
-
-          // Recarregar a lista para atualizar os botões
-          renderizarListaPresentes();
-          return true;
-        }
-        return false;
-      }
-
-      // Função para renderizar a lista de presentes
-      function renderizarListaPresentes() {
-
-        // Renderizar Mobiliário
-        const containerMobilia = document.getElementById("categoria-mobilia");
-        if (containerMobilia) {
-          containerMobilia.innerHTML = listaPresentesCompleta.mobilia
-            .map(
-              (presente) => `
-      <div class="item-presente ${isPresenteEscolhido(presente) ? "escolhido" : ""}">
-        <span>${presente}</span>
-        <button class="btn-escolher-presente" 
-          onclick="escolherPresente('${presente.replace(/'/g, "\\'")}')"
-          ${usuarioEscolheu || isPresenteEscolhido(presente) ? "disabled" : ""}>
-          ${isPresenteEscolhido(presente) ? "✓ Já escolhido" : "🎁 Escolher"}
-        </button>
-      </div>
-    `,
-            )
-            .join("");
-        }
-
-        // Renderizar Cozinha
-        const containerCozinha = document.getElementById("categoria-cozinha");
-        if (containerCozinha) {
-          containerCozinha.innerHTML = listaPresentesCompleta.cozinha
-            .map(
-              (presente) => `
-      <div class="item-presente ${isPresenteEscolhido(presente) ? "escolhido" : ""}">
-        <span>${presente}</span>
-        <button class="btn-escolher-presente" 
-          onclick="escolherPresente('${presente.replace(/'/g, "\\'")}')"
-          ${usuarioEscolheu || isPresenteEscolhido(presente) ? "disabled" : ""}>
-          ${isPresenteEscolhido(presente) ? "✓ Já escolhido" : "🎁 Escolher"}
-        </button>
-      </div>
-    `,
-            )
-            .join("");
-        }
-
-        // Renderizar Mesa Posta
-        const containerMesa = document.getElementById("categoria-mesa");
-        if (containerMesa) {
-          containerMesa.innerHTML = listaPresentesCompleta.mesa
-            .map(
-              (presente) => `
-      <div class="item-presente ${isPresenteEscolhido(presente) ? "escolhido" : ""}">
-        <span>${presente}</span>
-        <button class="btn-escolher-presente" 
-          onclick="escolherPresente('${presente.replace(/'/g, "\\'")}')"
-          ${usuarioEscolheu || isPresenteEscolhido(presente) ? "disabled" : ""}>
-          ${isPresenteEscolhido(presente) ? "✓ Já escolhido" : "🎁 Escolher"}
-        </button>
-      </div>
-    `,
-            )
-            .join("");
-        }
-      }
-
-      // Controle de abas dos presentes (Monetário vs Lista)
-      document
-        .getElementById("btnPresenteMonetario")
-        ?.addEventListener("click", function () {
-          document.getElementById("listaPresentesContainer").style.display =
-            "none";
-          // Mostrar modal de presente monetário
-          abrirModalPresente("modalPresenteMonetario");
-        });
-
-      document
-        .getElementById("btnPresentesMateriais")
-        ?.addEventListener("click", function () {
-          const container = document.getElementById("listaPresentesContainer");
-          if (container.style.display === "none") {
-            container.style.display = "block";
-            renderizarListaPresentes();
-            // Fechar qualquer overlay ativo
-            const overlay = document.getElementById("overlay");
-            if (overlay) overlay.classList.remove("ativo");
-            // Scroll suave até a lista
-            container.scrollIntoView({ behavior: "smooth", block: "start" });
-          } else {
-            container.style.display = "none";
-          }
-        });
-
-      // Inicializar renderização se o container estiver visível
-      if (
-        document.getElementById("listaPresentesContainer") &&
-        document.getElementById("listaPresentesContainer").style.display !==
-          "none"
-      ) {
-        renderizarListaPresentes();
-      }
-      // Função para fechar a lista de presentes
-      function fecharListaPresentes() {
-        const container = document.getElementById("listaPresentesContainer");
-        if (container) {
-          container.style.display = "none";
-        }
-        const overlay = document.getElementById("overlay");
-        if (overlay) overlay.classList.remove("ativo");
-      }
+// Função para fechar a lista de presentes
+function fecharListaPresentes() {
+  const container = document.getElementById("listaPresentesContainer");
+  if (container) {
+    container.style.display = "none";
+  }
+  const overlay = document.getElementById("overlay");
+  if (overlay) overlay.classList.remove("ativo");
+}
  // FORÇAR BOTÃO DE MÚSICA FUNCIONAR
 document.addEventListener("DOMContentLoaded", function() {
   const botao = document.getElementById("botaoMusica");
@@ -4592,11 +4631,7 @@ window.addEventListener('load', function() {
 });
 
     </script>
-    <!-- BOTÃO FLUTUANTE DE MÚSICA -->
-<div id="botaoMusica" class="botao-musica-flutuante">
-  <i id="iconeMusica" class="fas fa-play"></i>
-</div>
-<!-- FIREBASE -->
+  <!-- FIREBASE (APENAS MENSAGENS) -->
 <script type="module">
   import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-app.js";
   import { getFirestore, collection, addDoc, query, orderBy, onSnapshot } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore.js";
@@ -4688,50 +4723,107 @@ window.addEventListener('load', function() {
     }
   };
 
-  // ========== LISTA DE PRESENTES - FIREBASE ==========
-      const presentesRef = collection(db, "presentes-nuno-nicole");
+  // Inicializar
+  window.addEventListener("load", function() {
+    carregarMensagens();
+  });
 
-      function carregarPresentesEscolhidos() {
-        onSnapshot(presentesRef, (snapshot) => {
-          const escolhidos = [];
-          snapshot.forEach(doc => escolhidos.push(doc.data().presente));
-          presentesEscolhidos = escolhidos;
-          renderizarListaPresentes();
+  
+ // RSVP com nome e status
+const btnConfirmar = document.getElementById('btnConfirmarWhatsapp');
+const inputNome = document.getElementById('nomeConvidado');
+
+if (btnConfirmar) {
+  btnConfirmar.addEventListener('click', function() {
+    let nome = inputNome.value.trim();
+    
+    if (nome === "") {
+      alert("Por favor, digite o seu nome antes de confirmar.");
+      return;
+    }
+    
+    // Pegar o status selecionado
+    const statusSelecionado = document.querySelector('input[name="statusPresenca"]:checked');
+    const status = statusSelecionado ? statusSelecionado.value : "Sim, estarei presente";
+    
+    // Mensagem personalizada com nome e status
+    const mensagem = `Olá, eu ${nome} - ${status} no vosso casamento Nicole e Nuno, no dia 22 de Agosto de 2026.`;
+    const url = `https://wa.me/351960375870?text=${encodeURIComponent(mensagem)}`;
+    
+    window.open(url, '_blank');
+  });
+}
+</script>
+<!-- BOTÃO FLUTUANTE DE MÚSICA - VERSÃO QUE FUNCIONOU -->
+<div id="botaoMusica" style="width: 65px; height: 65px; background: linear-gradient(145deg, #6d4830, #5a3a25); border-radius: 50%; display: flex; align-items: center; justify-content: center; cursor: pointer; border: 2px solid #c9a03d; box-shadow: 0 10px 30px rgba(0,0,0,0.4); transition: all 0.3s ease;">
+  <i id="iconeMusica" class="fas fa-play" style="font-size: 2rem; color: white; margin-left: 3px;"></i>
+</div>
+
+<style>
+#botaoMusica:hover {
+  transform: scale(1.1);
+  box-shadow: 0 15px 35px rgba(0,0,0,0.5);
+  border-color: #dbb95c;
+}
+#botaoMusica:active {
+  transform: scale(0.95);
+}
+@media (max-width: 768px) {
+  #waxSeal {
+    width: 55px !important;
+    height: 55px !important;
+    top: 56% !important;
+  }
+}
+</style>
+
+<script>
+(function() {
+  var botao = document.getElementById("botaoMusica");
+  var audio = document.getElementById("musicaFundo");
+  var icone = document.getElementById("iconeMusica");
+  
+  if (botao && audio) {
+    // 🔥 AQUI ESTÁ A SOLUÇÃO - OS MESMOS COMANDOS QUE FUNCIONARAM NO CONSOLE
+    botao.style.setProperty('position', 'fixed', 'important');
+    botao.style.setProperty('bottom', '30px', 'important');
+    botao.style.setProperty('right', '30px', 'important');
+    botao.style.setProperty('top', 'auto', 'important');
+    botao.style.setProperty('left', 'auto', 'important');
+    botao.style.setProperty('zIndex', '9999999', 'important');
+    
+    // Mover para o body para garantir
+    document.body.appendChild(botao);
+    
+    console.log("✅ Botão configurado como flutuante!");
+    
+    audio.volume = 0.25;
+    audio.loop = true;
+    
+    botao.onclick = function(e) {
+      e.preventDefault();
+      e.stopPropagation();
+      
+      botao.style.transform = "scale(0.95)";
+      setTimeout(function() { 
+        botao.style.transform = ""; 
+      }, 150);
+      
+      if (audio.paused) {
+        audio.play().then(function() {
+          icone.className = "fas fa-pause";
+          icone.style.marginLeft = "0";
+        }).catch(function(err) {
+          console.log("Erro ao tocar:", err);
         });
+      } else {
+        audio.pause();
+        icone.className = "fas fa-play";
+        icone.style.marginLeft = "3px";
       }
-
-      window.escolherPresente = async function(presente) {
-        if (usuarioEscolheu) {
-          alert("❌ Você já escolheu um presente! Cada convidado pode escolher apenas 1 presente.");
-          return;
-        }
-
-        if (presentesEscolhidos.includes(presente)) {
-          alert(`❌ O presente "${presente}" já foi escolhido. Por favor, escolha outro.`);
-          return;
-        }
-
-        if (confirm(`✅ Confirmar: "${presente}"?`)) {
-          try {
-            await addDoc(presentesRef, {
-              presente: presente,
-              timestamp: Date.now()
-            });
-
-            usuarioEscolheu = true;
-            localStorage.setItem("usuarioJaEscolheu", "true");
-
-          } catch (err) {
-            alert("Erro ao guardar presente. Tenta novamente.");
-            console.error(err);
-          }
-        }
-      };
-
-      window.addEventListener("load", function() {
-        carregarMensagens();
-        carregarPresentesEscolhidos();
-      });
+    };
+  }
+})();
 </script>
   </body>
 </html>
