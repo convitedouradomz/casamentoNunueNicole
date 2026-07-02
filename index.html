@@ -2031,108 +2031,7 @@
         font-weight: 650;
       }
 
-      /* ESTILOS PARA LISTA DE PRESENTES */
-      .categoria-presentes {
-        margin-bottom: 40px;
-      }
-
-      .titulo-categoria {
-        font-size: 1.8rem;
-        font-weight: bold;
-        color: var(--verde-oliva);
-        margin: 25px 0 15px;
-        padding-bottom: 8px;
-        border-bottom: 2px solid var(--dourado);
-        display: inline-block;
-      }
-
-      .lista-presentes {
-        display: grid;
-        grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-        gap: 15px;
-        margin-bottom: 30px;
-      }
-
-    .item-presente {
-  background-color: var(--creme-claro);
-  border-radius: 10px;
-  padding: 15px 20px;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  transition: all 0.3s ease;
-  border-left: 6px solid #e8c49a !important;  /* ← com !important para forçar */
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
-}
-      .item-presente span {
-        font-size: 1.2rem;
-        color: var(--cinza-escuro);
-      }
-
-      .btn-escolher-presente {
-        background: linear-gradient(
-          135deg,
-          var(--verde-oliva),
-          var(--verde-oliva-suave)
-        );
-        color: white;
-        border: none;
-        padding: 8px 20px;
-        border-radius: 30px;
-        cursor: pointer;
-        font-family: "Cormorant Garamond", serif;
-        font-size: 1rem;
-        font-weight: 600;
-        transition: all 0.3s ease;
-      }
-
-      .btn-escolher-presente:hover {
-        transform: scale(1.05);
-        box-shadow: 0 3px 10px rgba(0, 0, 0, 0.2);
-      }
-
-      .item-presente.escolhido {
-        background-color: #e0e0e0;
-        opacity: 0.6;
-        text-decoration: line-through;
-      }
-
-      .item-presente.escolhido .btn-escolher-presente {
-        background: #999;
-        cursor: not-allowed;
-        transform: none;
-      }
-
-      .item-presente.escolhido .btn-escolher-presente:hover {
-        transform: none;
-        box-shadow: none;
-      }
-
-      .mensagem-presente-escolhido {
-        text-align: center;
-        margin-top: 30px;
-        padding: 15px;
-        background-color: var(--verde-oliva-claro);
-        border-radius: 10px;
-        color: var(--cinza-escuro);
-        font-size: 1.2rem;
-      }
-
-      .mensagem-presente-escolhido i {
-        color: var(--dourado);
-        margin-right: 10px;
-      }
-
-      .aviso-unico-presente {
-        text-align: center;
-        background-color: #fff3cd;
-        border-left: 4px solid #ffc107;
-        padding: 12px;
-        margin-bottom: 25px;
-        border-radius: 8px;
-        font-size: 1.1rem;
-        color: #856404;
-      }
+   
       /* CORREÇÃO DO CALENDÁRIO - CELULAR */
 @media (max-width: 768px) {
   .calendario-pequeno {
@@ -2638,7 +2537,7 @@
   border-radius: 15px;
   box-shadow: 0 20px 50px rgba(0, 0, 0, 0.2);
   z-index: 1100;
-  max-width: 380px;
+  max-width: 500px;
   width: 90%;
   opacity: 0;
   visibility: hidden;
@@ -2662,11 +2561,12 @@
 
 .modal-dress-elegante img {
   max-width: 100%;
-  max-height: 250px;
+  max-height: 70vh;
   width: auto;
   height: auto;
   border-radius: 10px;
-  margin: 10px 0;
+  margin: 15px auto;
+  display: block;
   box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
   object-fit: contain;
 }
@@ -2720,6 +2620,34 @@
 .btn-fechar-modal-dress:hover {
   transform: translateY(-2px);
   box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+}
+/* ÍCONE PULSANTE ACIMA DO TÍTULO */
+.icone-pulsante {
+  text-align: center;
+  margin-bottom: 20px;
+  animation: pulsarConvite 1.5s infinite ease-in-out;
+}
+
+.icone-pulsante i {
+  font-size: 3.5rem;
+  color: var(--verde-oliva);
+}
+
+@keyframes pulsarConvite {
+  0%, 100% {
+    transform: scale(1);
+    opacity: 0.8;
+  }
+  50% {
+    transform: scale(1.1);
+    opacity: 1;
+  }
+}
+
+@media (max-width: 768px) {
+  .icone-pulsante i {
+    font-size: 2.5rem;
+  }
 }
 /* ÍCONE PULSANTE DE ROUPA - DRESS CODE */
 .icone-roupa-pulsante {
@@ -2895,6 +2823,15 @@
 /* Quando a capa está visível, esconder o botão */
 body:has(#capa:not(.oculto)) #botaoMusica {
   display: none !important;
+}
+/* FORÇAR CONTEÚDO PRINCIPAL A APARECER */
+#conteudoPrincipal:not(.oculto) {
+  opacity: 1 !important;
+  display: block !important;
+}
+
+#conteudoPrincipal {
+  opacity: 1 !important;
 }
 </style>
   </head>
@@ -3157,6 +3094,21 @@ body:has(#capa:not(.oculto)) #botaoMusica {
           </button>
         </div>
       </div>
+<!-- Corte do Bolo -->
+      <div class="evento-elegante">
+        <div class="circulo-tempo"></div>
+        <div class="icone-evento-elegante">
+          <i class="fas fa-cake-candles"></i>
+        </div>
+        <div class="info-evento-elegante">
+        <div class="hora-evento-elegante">14h50</div>
+          <div class="titulo-evento-elegante">Corte do Bolo</div>
+          <div class="local-evento-elegante">Salão de Festas El Dourado</div>
+          <button class="btn-mapa-elegante" onclick="window.open('https://maps.app.goo.gl/B7L9gYVqHmhbyR1i6?g_st=aw', '_blank')">
+            <i class="fas fa-map-marker-alt"></i> Ver no mapa
+          </button>
+        </div>
+      </div>
 
       <!-- Copo d'Água -->
       <div class="evento-elegante">
@@ -3165,23 +3117,8 @@ body:has(#capa:not(.oculto)) #botaoMusica {
           <i class="fas fa-champagne-glasses"></i>
         </div>
         <div class="info-evento-elegante">
-          <div class="hora-evento-elegante">16h00</div>
+          <div class="hora-evento-elegante">15h30</div>
           <div class="titulo-evento-elegante">Copo d'Água</div>
-          <div class="local-evento-elegante">Salão de Festas El Dourado</div>
-          <button class="btn-mapa-elegante" onclick="window.open('https://maps.app.goo.gl/B7L9gYVqHmhbyR1i6?g_st=aw', '_blank')">
-            <i class="fas fa-map-marker-alt"></i> Ver no mapa
-          </button>
-        </div>
-      </div>
-
-      <!-- Corte do Bolo -->
-      <div class="evento-elegante">
-        <div class="circulo-tempo"></div>
-        <div class="icone-evento-elegante">
-          <i class="fas fa-cake-candles"></i>
-        </div>
-        <div class="info-evento-elegante">
-          <div class="titulo-evento-elegante">Corte do Bolo</div>
           <div class="local-evento-elegante">Salão de Festas El Dourado</div>
           <button class="btn-mapa-elegante" onclick="window.open('https://maps.app.goo.gl/B7L9gYVqHmhbyR1i6?g_st=aw', '_blank')">
             <i class="fas fa-map-marker-alt"></i> Ver no mapa
@@ -3207,14 +3144,10 @@ body:has(#capa:not(.oculto)) #botaoMusica {
     </p>
     
     <div class="dress-code-container">
-      <div class="dress-code-botoes">
-  <button class="btn-dress" id="btnMulheres">
-    <img src="M.png" alt="Mulher" style="width: 24px; height: auto; vertical-align: middle; margin-right: 10px;">
-    Mulheres
-  </button>
-  <button class="btn-dress" id="btnHomens">
-    <img src="H.png" alt="Homem" style="width: 24px; height: auto; vertical-align: middle; margin-right: 10px;">
-    Homens
+   <div class="dress-code-botoes">
+  <button class="btn-dress" id="btnDressCode">
+    <i class="fas fa-vest" style="margin-right: 10px;"></i>
+    Ver Dress Code
   </button>
 </div>
     </div>
@@ -3222,26 +3155,12 @@ body:has(#capa:not(.oculto)) #botaoMusica {
 </section>
   
 
-<!-- MODAL DRESS CODE MULHERES -->
-<div id="modalDressMulheres" class="modal-dress-elegante">
-  <span class="fechar-modal-dress" onclick="fecharModalDress('modalDressMulheres')">&times;</span>
-  <h3>👗 Sugestão para Mulheres</h3>
-  <img src="paletamulheres.jpeg" alt="Paleta de cores para Mulheres" />
-  <div class="aviso-dress">
-    <i class="fas fa-ban"></i> Proibido usar a cor branca
-  </div>
-  <button class="btn-fechar-modal-dress" onclick="fecharModalDress('modalDressMulheres')">Fechar</button>
-</div>
-
-<!-- MODAL DRESS CODE HOMENS -->
-<div id="modalDressHomens" class="modal-dress-elegante">
-  <span class="fechar-modal-dress" onclick="fecharModalDress('modalDressHomens')">&times;</span>
-  <h3>👔 Sugestão para Homens</h3>
-  <img src="paletahomem.png" alt="Paleta de cores para Homens" />
-  <div class="aviso-dress">
-    <i class="fas fa-tie"></i> Vestidos de Black Tie
-  </div>
-  <button class="btn-fechar-modal-dress" onclick="fecharModalDress('modalDressHomens')">Fechar</button>
+<!-- MODAL DRESS CODE -->
+<div id="modalDressCode" class="modal-dress-elegante">
+  <span class="fechar-modal-dress" onclick="fecharModalDress('modalDressCode')">&times;</span>
+  <h3>👗👔 Dress Code</h3>
+  <img src="Dresscode.jpeg" alt="Dress Code" />
+  <button class="btn-fechar-modal-dress" onclick="fecharModalDress('modalDressCode')">Fechar</button>
 </div>
 
       <!-- CONTADOR - SCROLL 8 -->
@@ -3333,7 +3252,7 @@ body:has(#capa:not(.oculto)) #botaoMusica {
     <h2>Confirmação de Presença</h2>
     <div class="rsvp-container-elegante">
       <p style="font-size: 1.3rem; color: var(--cinza-medio); margin-bottom: 20px;">
-        Por favor, confirme sua presença até 3 de Julho de 2026
+        Por favor, confirme sua presença até 1 de Agosto de 2026
       </p>
       
       <!-- Campo para o nome -->
@@ -3455,86 +3374,69 @@ body:has(#capa:not(.oculto)) #botaoMusica {
       </section>
 
       <!-- PRESENTES - SCROLL 11 -->
-      <section id="presentes" class="secao">
-        <div class="conteudo-secao">
-         <div class="icone-presente-pulsante">
-  <i class="fas fa-gift"></i>
-</div>
-<h2>Sugestões de Presentes</h2>
-          <p
-            style="
-              font-size: 1.3rem;
-              color: var(--cinza-medio);
-              max-width: 700px;
-              margin: 0 auto 20px;
-            "
-          >
-            A vossa presença é o nosso maior presente.<br />Se desejar oferecer-nos um presente, preparamos uma lista especial para si.
-  Escolha com carinho o que gostaria de nos oferecer. 
-          </p>
-
-          <div class="opcoes-presentes-elegante" style="margin-bottom: 30px">
-            <button class="btn-presente-elegante" id="btnPresenteMonetario">
-              <i class="fas fa-gift"></i>
-              Presente Monetário
-            </button>
-            <button
-  class="btn-presente-elegante"
-  id="btnPresentesMateriais"
-  style="background: linear-gradient(135deg, var(--creme-claro), white); color: var(--verde-oliva);"
->
-  <i class="fas fa-list"></i>
-  Lista de Presentes 
-</button>
-          </div>
-
-          <div id="listaPresentesContainer" style="display: none">
-  <!-- BOTÃO FECHAR -->
-  <div style="text-align: right; margin-bottom: 15px">
-    <button onclick="fecharListaPresentes()" style="background: transparent; border: none; font-size: 2rem; cursor: pointer; color: var(--cinza-medio);">
-      <i class="fas fa-times-circle"></i>
-    </button>
-  </div>
-  
-  <!-- AVISO IMPORTANTE -->
-  <div class="aviso-unico-presente" style="background: #f5f5f5; border-left-color: #999; color: #333;">
-    <i class="fas fa-info-circle"></i>
-    <strong>SUGESTÃO:</strong> Sugerimos ver opções de presentes na <strong>Casa das Loiças</strong>
-  </div>
-  
-  <!-- BOTÃO VER LOCALIZAÇÃO -->
-  <div style="text-align: center; margin-bottom: 30px;">
-    <a href="https://maps.app.goo.gl/iUHvyUHRRPMD9spS9" target="_blank" class="btn-mapa-localizacao" style="display: inline-flex; align-items: center; gap: 10px; background: #333; color: white; padding: 12px 25px; border-radius: 50px; text-decoration: none; font-family: 'Cormorant Garamond', serif; font-weight: 600; transition: all 0.3s ease;">
-      <i class="fas fa-map-marker-alt"></i> Ver Localização
-    </a>
-  </div>
-  
-  <!-- CATEGORIA 1: MESA POSTA -->
-  <div class="categoria-presentes">
-    <div class="titulo-categoria" style="color: #555; border-bottom-color: #ccc;">
-      🍽️ Mesa Posta
+<section id="presentes" class="secao">
+  <div class="conteudo-secao">
+    <div class="icone-presente-pulsante">
+      <i class="fas fa-gift"></i>
     </div>
-    <div class="lista-presentes" id="categoria-mesa"></div>
-  </div>
+    <h2>Sugestões de Presentes</h2>
+    <p style="font-size: 1.3rem; color: var(--cinza-medio); max-width: 700px; margin: 0 auto 30px;">
+      A vossa presença é o nosso maior presente.<br />
+      Se desejar oferecer-nos algo, sugerimos estas lojas:
+    </p>
 
-  <!-- CATEGORIA 2: COZINHA (UTENSÍLIOS) -->
-  <div class="categoria-presentes">
-    <div class="titulo-categoria" style="color: #555; border-bottom-color: #ccc;">
-      <img src="cocina.png" alt="Cozinha" style="width: 35px; height: auto; vertical-align: middle; margin-right: 10px; filter: grayscale(100%);">
-      Cozinha (Utensílios)
+    <!-- OPÇÕES: Presente Monetário ou Lojas -->
+    <div class="opcoes-presentes-elegante" style="margin-bottom: 30px">
+      <button class="btn-presente-elegante" id="btnPresenteMonetario">
+        <i class="fas fa-gift"></i>
+        Presente Monetário
+      </button>
+      <button class="btn-presente-elegante" id="btnLojasSugeridas" style="background: linear-gradient(135deg, var(--creme-claro), white); color: var(--verde-oliva);">
+        <i class="fas fa-store"></i>
+        Lojas Sugeridas
+      </button>
     </div>
-    <div class="lista-presentes" id="categoria-cozinha"></div>
-  </div>
 
-  <!-- CATEGORIA 3: MOBILIÁRIO E TÊXTEIS -->
-  <div class="categoria-presentes">
-    <div class="titulo-categoria" style="color: #555; border-bottom-color: #ccc;">
-      <img src="mobilia.png" alt="Mobiliário" style="width: 35px; height: auto; vertical-align: middle; margin-right: 10px; filter: grayscale(100%);">
-      Mobiliário e Têxteis
+    <!-- CONTAINER DAS LOJAS (inicialmente escondido) -->
+    <div id="lojasContainer" style="display: none; margin-top: 30px;">
+      
+      <!-- BOTÃO FECHAR -->
+      <div style="text-align: right; margin-bottom: 20px;">
+        <button onclick="fecharLojas()" style="background: transparent; border: none; font-size: 2rem; cursor: pointer; color: var(--cinza-medio);">
+          <i class="fas fa-times-circle"></i>
+        </button>
+      </div>
+
+      <!-- CARDS DAS LOJAS -->
+      <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 25px;">
+        
+        <!-- CARD 1: Casa das Loiças -->
+        <div style="background: #f9f6f2; border-radius: 16px; padding: 25px 20px; text-align: center; box-shadow: 0 8px 25px rgba(0,0,0,0.06); border: 1px solid #e8ddd0;">
+         <img src="loicas.png" alt="Casa das Loiças" style="width: 90px; height: auto; margin-bottom: 15px;">
+<h3 style="font-family: 'Playfair Display', serif; color: #000000; font-size: 1.4rem; margin-bottom: 8px;">Casa das Loiças</h3>
+         <p style="font-size: 0.95rem; color: #555; margin-bottom: 12px;">Loja especializada em loiças, vidros e artigos de mesa.</p>
+<div style="width: 330px; height: 1px; background: #676767; margin: 0 auto 12px;"></div>
+<p style="font-size: 0.9rem; color: #171717; font-weight: 600; margin-bottom: 18px;">Endereço: Avenida Karl Marx</p>
+<a href="https://maps.app.goo.gl/iUHvyUHRRPMD9spS9" target="_blank" style="display: inline-block; background: #888888; color: white; padding: 10px 25px; border-radius: 50px; text-decoration: none; font-weight: 600; font-size: 0.9rem; transition: all 0.3s ease;">
+            <i class="fas fa-map-marker-alt"></i> Ver Localização
+          </a>
+        </div>
+
+        <!-- CARD 2: Louça Amiga -->
+        <div style="background: #f9f6f2; border-radius: 16px; padding: 25px 20px; text-align: center; box-shadow: 0 8px 25px rgba(0,0,0,0.06); border: 1px solid #e8ddd0;">
+          <<img src="amiga.png" alt="Louça Amiga" style="width: 90px; height: auto; margin-bottom: 15px;">
+<h3 style="font-family: 'Playfair Display', serif; color: #000000; font-size: 1.4rem; margin-bottom: 8px;">Louça Amiga</h3>
+          <p style="font-size: 0.95rem; color: #555; margin-bottom: 12px;">Variedade em louças e utensílios para sua casa.</p>
+<div style="width: 330px; height: 1px; background: #676767; margin: 0 auto 12px;"></div>
+<p style="font-size: 0.9rem; color: #171717; font-weight: 600; margin-bottom: 18px;">Endereço: Avenida Karl Marx</p>
+<a href="https://maps.app.goo.gl/KSHFmS2RUxwFbA5LA" target="_blank" style="display: inline-block; background: #888888; color: white; padding: 10px 25px; border-radius: 50px; text-decoration: none; font-weight: 600; font-size: 0.9rem; transition: all 0.3s ease;">
+            <i class="fas fa-map-marker-alt"></i> Ver Localização
+          </a>
+        </div>
+      </div>
     </div>
-    <div class="lista-presentes" id="categoria-mobilia"></div>
   </div>
-</div>
+</section>
       <!-- RODAPÉ - MANUAL DO BOM CONVIDADO -->
 <section id="rodape" class="secao" style="width: 100vw; max-width: 100%; margin: 0; padding: 60px 20px; background: #4a3320; min-height: 100vh; display: flex; align-items: center; justify-content: center; left: 0; right: 0; position: relative;">
   <div class="conteudo-secao" style="max-width: 900px; width: 100%; margin: 0 auto;">
@@ -3909,10 +3811,11 @@ if (waxSeal) {
       }, 800);
 
       setTimeout(() => tocarMusica(), 500);
-
-      setTimeout(() => {
+setTimeout(() => {
   conteudoPrincipal.classList.remove("oculto");
   conteudoPrincipal.style.opacity = "1";
+  conteudoPrincipal.style.display = "block";
+  conteudoPrincipal.style.visibility = "visible";
 }, 2000);
 }, 800);
   });
@@ -4162,11 +4065,6 @@ document.getElementById("modalGaleria")?.addEventListener("click", function(e) {
         .getElementById("btnPresenteMonetario")
         .addEventListener("click", function () {
           abrirModalPresente("modalPresenteMonetario");
-        });
-
-      document
-        .getElementById("btnPresentesMateriais")
-        .addEventListener("click", function () {
         });
 
       function abrirModalPresente(idModal) {
@@ -4554,9 +4452,7 @@ window.addEventListener('load', function() {
     criarCoracaoFlutuante();
   }, 500);
 });
-// ========== DRESS CODE - MODAIS ==========
-const btnMulheresModal = document.getElementById("btnMulheres");
-const btnHomensModal = document.getElementById("btnHomens");
+const btnDressCodeModal = document.getElementById("btnDressCode");
 const overlayDress = document.getElementById("overlay");
 
 function abrirModalDress(idModal) {
@@ -4575,24 +4471,17 @@ function fecharModalDress(idModal) {
   }, 300);
 }
 
-// Eventos dos botões
-if (btnMulheresModal) {
-  btnMulheresModal.addEventListener("click", function() {
-    abrirModalDress("modalDressMulheres");
-  });
-}
-
-if (btnHomensModal) {
-  btnHomensModal.addEventListener("click", function() {
-    abrirModalDress("modalDressHomens");
+// Evento do botão
+if (btnDressCodeModal) {
+  btnDressCodeModal.addEventListener("click", function() {
+    abrirModalDress("modalDressCode");
   });
 }
 
 // Fechar ao clicar no overlay
 if (overlayDress) {
   overlayDress.addEventListener("click", function() {
-    fecharModalDress("modalDressMulheres");
-    fecharModalDress("modalDressHomens");
+    fecharModalDress("modalDressCode");
   });
 }
 // ANIMAÇÃO DO CALENDÁRIO E DATA QUANDO APARECER NO SCROLL
@@ -4752,6 +4641,25 @@ if (btnConfirmar) {
     window.open(url, '_blank');
   });
 }
+// ========== LOJAS SUGERIDAS ==========
+const btnLojas = document.getElementById('btnLojasSugeridas');
+const lojasContainer = document.getElementById('lojasContainer');
+
+if (btnLojas) {
+  btnLojas.addEventListener('click', function() {
+    if (lojasContainer.style.display === 'none') {
+      lojasContainer.style.display = 'block';
+      lojasContainer.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    } else {
+      lojasContainer.style.display = 'none';
+    }
+  });
+}
+
+window.fecharLojas = function() {
+  const container = document.getElementById('lojasContainer');
+  if (container) container.style.display = 'none';
+};
 </script>
 <!-- BOTÃO FLUTUANTE DE MÚSICA - VERSÃO QUE FUNCIONOU -->
 <div id="botaoMusica" style="width: 65px; height: 65px; background: linear-gradient(145deg, #6d4830, #5a3a25); border-radius: 50%; display: flex; align-items: center; justify-content: center; cursor: pointer; border: 2px solid #c9a03d; box-shadow: 0 10px 30px rgba(0,0,0,0.4); transition: all 0.3s ease;">
@@ -4772,6 +4680,59 @@ if (btnConfirmar) {
     width: 55px !important;
     height: 55px !important;
     top: 56% !important;
+  }
+}
+/* CARDS DAS LOJAS SUGERIDAS */
+.card-loja {
+  background: #f5f0ea;
+  border-radius: 16px;
+  padding: 25px 20px;
+  text-align: center;
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.06);
+  border: 1px solid #d4c9bc;
+  transition: all 0.3s ease;
+}
+
+.card-loja:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 12px 35px rgba(0, 0, 0, 0.1);
+}
+
+.card-loja h3 {
+  color: #000000 !important;
+}
+
+.card-loja p {
+  color: #000000 !important;
+}
+
+.btn-localizacao-loja {
+  display: inline-block;
+  background: #6d4830;
+  color: #ffffff;
+  padding: 10px 25px;
+  border-radius: 50px;
+  text-decoration: none;
+  font-weight: 600;
+  font-size: 0.9rem;
+  transition: all 0.3s ease;
+  border: none;
+  cursor: pointer;
+}
+
+.btn-localizacao-loja:hover {
+  background: #8b5e3c;
+  transform: translateY(-2px);
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.15);
+}
+
+.btn-localizacao-loja i {
+  margin-right: 8px;
+}
+
+@media (max-width: 768px) {
+  .card-loja {
+    padding: 20px 15px;
   }
 }
 </style>
